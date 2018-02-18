@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-/**
- *
- * @author evele
- */
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 public class TabelaPessoa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TabelaPessoa
-     */
     public TabelaPessoa() {
         initComponents();
     }
@@ -39,7 +31,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
         buttonAtualizarP = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaPessoa = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +61,11 @@ public class TabelaPessoa extends javax.swing.JFrame {
         });
 
         buttonExcluirP.setText("Excluir");
+        buttonExcluirP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirPActionPerformed(evt);
+            }
+        });
 
         buttonAtualizarP.setText("Atualizar");
 
@@ -127,24 +124,20 @@ public class TabelaPessoa extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "nome", "idade", "foto"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaPessoaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaPessoa);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,8 +183,25 @@ public class TabelaPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_textIdadeActionPerformed
 
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel dtmPessoa = (DefaultTableModel) tabelaPessoa.getModel();
+        Object[] dados = {textNome.getText(), textIdade.getText(), textFoto.getText()};
     }//GEN-LAST:event_buttonInserirPActionPerformed
+
+    private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
+        if (tabelaPessoa.getSelectedRow() != -1){
+        Object[] dados = {textNome.getText(), textIdade.getText(), textFoto.getText()};             
+        } else{
+            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
+        }
+    }//GEN-LAST:event_buttonExcluirPActionPerformed
+
+    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+        if (tabelaPessoa.getSelectedRow() != -1){
+                    
+        } else{
+            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
+        }
+    }//GEN-LAST:event_tabelaPessoaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,7 +248,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaPessoa;
     private javax.swing.JTextField textFoto;
     private javax.swing.JTextField textIdade;
     private javax.swing.JTextField textNome;
