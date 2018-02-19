@@ -4,17 +4,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import dominio.Pessoa;
-import dao.PessoaDAO;
+import dominio.Post;
+import dao.PostDAO;
 
-public class TabelaPessoa extends javax.swing.JFrame {
+public class TabelaPost extends javax.swing.JFrame {
 
-    public TabelaPessoa() {
+    public TabelaPost() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        tabelaPessoa.setRowSorter(new TableRowSorter(modelo));
-        
-        //readTabelaPessoa();
     }
     
     @SuppressWarnings("unchecked")
@@ -23,11 +19,11 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textNome = new javax.swing.JTextField();
+        textTexto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        textIdade = new javax.swing.JTextField();
+        textData = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        textFoto = new javax.swing.JTextField();
+        textIdPessoa = new javax.swing.JTextField();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
@@ -37,23 +33,23 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Texto");
 
-        textNome.addActionListener(new java.awt.event.ActionListener() {
+        textTexto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNomeActionPerformed(evt);
+                textTextoActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Idade");
+        jLabel2.setText("Data");
 
-        textIdade.addActionListener(new java.awt.event.ActionListener() {
+        textData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdadeActionPerformed(evt);
+                textDataActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Foto");
+        jLabel3.setText("idPessoa");
 
         buttonInserirP.setText("Inserir");
         buttonInserirP.addActionListener(new java.awt.event.ActionListener() {
@@ -87,18 +83,18 @@ public class TabelaPessoa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonInserirP)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(textIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(buttonExcluirP)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -115,9 +111,9 @@ public class TabelaPessoa extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInserirP)
@@ -131,17 +127,9 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "nome", "idade", "foto"
+                "id", "texto", "data", "idPessoa"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaPessoaMouseClicked(evt);
@@ -184,58 +172,31 @@ public class TabelaPessoa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNomeActionPerformed
+    private void textTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTextoActionPerformed
 
-    private void textIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textIdadeActionPerformed
+    }//GEN-LAST:event_textTextoActionPerformed
 
-    public void readTabelaPessoa(){
-        //método que mostra o conteúdo da tabelas
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        modelo.setNumRows(0);
-        
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        
-        for(Pessoa pessoa: pessoaDAO.read()){
-            modelo.addRow(new Object[]{
-                pessoa.getId(),
-                pessoa.getNome(),
-                pessoa.getIdade(),
-                pessoa.getFoto()              
-            });
-        }
-    }
+    private void textDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataActionPerformed
+
+    }//GEN-LAST:event_textDataActionPerformed
+
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
-        //insere uma pessoa no banco de dados.
-        Pessoa pessoa = new Pessoa();
-        PessoaDAO pessoaDAO = new PessoaDAO();
+        Post post = new Post();
+        PostDAO postDAO = new PostDAO();
                 
-        pessoa.setNome(textNome.getText());
-        pessoa.setIdade(Integer.parseInt(textIdade.getText()));
-        pessoa.setFoto(textFoto.getText());
+        post.setData(textData.getText());
+        post.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
+        post.setTexto(textTexto.getText());
         
-        pessoaDAO.create(pessoa);
-        
-        //readTabelaPessoa();
+        postDAO.create(post);
     }//GEN-LAST:event_buttonInserirPActionPerformed
-    
+
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-        if (tabelaPessoa.getSelectedRow() != -1){
-        Object[] dados = {textNome.getText(), textIdade.getText(), textFoto.getText()};             
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
-        }
+
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
-        if (tabelaPessoa.getSelectedRow() != -1){
-                    
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
-        }
+
     }//GEN-LAST:event_tabelaPessoaMouseClicked
 
     
@@ -243,7 +204,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TabelaPessoa().setVisible(true);
+                new TabelaPost().setVisible(true);
             }
         });
     }
@@ -259,8 +220,8 @@ public class TabelaPessoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaPessoa;
-    private javax.swing.JTextField textFoto;
-    private javax.swing.JTextField textIdade;
-    private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textData;
+    private javax.swing.JTextField textIdPessoa;
+    private javax.swing.JTextField textTexto;
     // End of variables declaration//GEN-END:variables
 }

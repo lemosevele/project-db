@@ -9,12 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ConnectionFactory {
-    private final String DRIVER = "com.mysql.jdbc.Driver";
-    private final String URL = "jdbc:mysql://localhost:3306/";
-    private final String USER = "root";
-    private final String PASS = "";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/projeto_bd";
+    private static final String USER = "root";
+    private static final String PASS = "";
     
-    public Connection getConnection(){
+    public static Connection getConnection(){
         try {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);

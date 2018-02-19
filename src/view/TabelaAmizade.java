@@ -4,17 +4,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import dominio.Pessoa;
-import dao.PessoaDAO;
+import dominio.Amizade;
+import dao.AmizadeDAO;
 
-public class TabelaPessoa extends javax.swing.JFrame {
+public class TabelaAmizade extends javax.swing.JFrame {
 
-    public TabelaPessoa() {
+    public TabelaAmizade() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        tabelaPessoa.setRowSorter(new TableRowSorter(modelo));
-        
-        //readTabelaPessoa();
     }
     
     @SuppressWarnings("unchecked")
@@ -23,37 +19,27 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textNome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        textIdade = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        textFoto = new javax.swing.JTextField();
+        textRotulo = new javax.swing.JTextField();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
+        textIdPessoa2 = new javax.swing.JTextField();
+        textIdPessoa1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPessoa = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Rótulo");
 
-        textNome.addActionListener(new java.awt.event.ActionListener() {
+        textRotulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNomeActionPerformed(evt);
+                textRotuloActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Idade");
-
-        textIdade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdadeActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Foto");
 
         buttonInserirP.setText("Inserir");
         buttonInserirP.addActionListener(new java.awt.event.ActionListener() {
@@ -71,54 +57,58 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         buttonAtualizarP.setText("Atualizar");
 
+        jLabel2.setText("idPessoa1");
+
+        jLabel3.setText("idPessoa2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonInserirP)
+                        .addGap(50, 50, 50)
+                        .addComponent(buttonExcluirP)
+                        .addGap(49, 49, 49))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(textIdPessoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textIdPessoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonAtualizarP)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textRotulo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(108, 108, 108)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(78, 78, 78))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonInserirP)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(textIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(buttonExcluirP)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(buttonAtualizarP)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(93, 93, 93)
+                .addComponent(jLabel1)
+                .addGap(102, 102, 102))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addComponent(textRotulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textIdPessoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textIdPessoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInserirP)
                     .addComponent(buttonExcluirP)
@@ -131,17 +121,9 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "nome", "idade", "foto"
+                "idPessoa1", "idPessoa2", "rotulo"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaPessoaMouseClicked(evt);
@@ -184,58 +166,28 @@ public class TabelaPessoa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
+    private void textRotuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRotuloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textNomeActionPerformed
+    }//GEN-LAST:event_textRotuloActionPerformed
 
-    private void textIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textIdadeActionPerformed
-
-    public void readTabelaPessoa(){
-        //método que mostra o conteúdo da tabelas
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        modelo.setNumRows(0);
-        
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        
-        for(Pessoa pessoa: pessoaDAO.read()){
-            modelo.addRow(new Object[]{
-                pessoa.getId(),
-                pessoa.getNome(),
-                pessoa.getIdade(),
-                pessoa.getFoto()              
-            });
-        }
-    }
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
-        //insere uma pessoa no banco de dados.
-        Pessoa pessoa = new Pessoa();
-        PessoaDAO pessoaDAO = new PessoaDAO();
+        Amizade amizade = new Amizade();
+        AmizadeDAO amizadeDAO = new AmizadeDAO();
                 
-        pessoa.setNome(textNome.getText());
-        pessoa.setIdade(Integer.parseInt(textIdade.getText()));
-        pessoa.setFoto(textFoto.getText());
+        amizade.setRotulo(textRotulo.getText());
+        amizade.setIdPessoa1(Integer.parseInt(textIdPessoa1.getText()));
+        amizade.setIdPessoa2(Integer.parseInt(textIdPessoa2.getText()));
         
-        pessoaDAO.create(pessoa);
         
-        //readTabelaPessoa();
+        amizadeDAO.create(amizade);
     }//GEN-LAST:event_buttonInserirPActionPerformed
-    
+
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-        if (tabelaPessoa.getSelectedRow() != -1){
-        Object[] dados = {textNome.getText(), textIdade.getText(), textFoto.getText()};             
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
-        }
+
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
-        if (tabelaPessoa.getSelectedRow() != -1){
-                    
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
-        }
+
     }//GEN-LAST:event_tabelaPessoaMouseClicked
 
     
@@ -243,7 +195,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TabelaPessoa().setVisible(true);
+                new TabelaAmizade().setVisible(true);
             }
         });
     }
@@ -259,8 +211,8 @@ public class TabelaPessoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaPessoa;
-    private javax.swing.JTextField textFoto;
-    private javax.swing.JTextField textIdade;
-    private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textIdPessoa1;
+    private javax.swing.JTextField textIdPessoa2;
+    private javax.swing.JTextField textRotulo;
     // End of variables declaration//GEN-END:variables
 }
