@@ -1,26 +1,29 @@
 package dao;
 
+import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import dominio.Post;
+import dominio.Comentario;
 import connection.ConnectionFactory;
 
-
-public class PostDAO {
+public class ComentarioDAO {
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
     
-    public void create(Post post){
+    public void create(Comentario comentario){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("insert into post(datap, texto, idPessoa) values(?, ?, ?)");
-            stmt.setString(1, post.getData());
-            stmt.setString(2, post.getTexto());
-            stmt.setInt(3, post.getIdPessoa());
+            stmt = con.prepareStatement("insert into comentario(datac, texto, idPessoa, idPost) values(?, ?, ?, ?)");
+            stmt.setString(1, comentario.getData());
+            stmt.setString(2, comentario.getTexto());
+            stmt.setInt(3, comentario.getIdPessoa());
+            stmt.setInt(4, comentario.getIdPost());
             
             stmt.executeUpdate();
             
@@ -32,5 +35,6 @@ public class PostDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-        
 }
+        
+

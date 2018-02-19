@@ -40,7 +40,7 @@ public class PessoaDAO {
         }
     }
     
-    public List<Pessoa> read(){
+    public List<Pessoa> read(){ //olhar esse método, ta dando erro
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
