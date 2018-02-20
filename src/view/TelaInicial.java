@@ -59,12 +59,32 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         buttonFoto.setText("Foto");
+        buttonFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFotoActionPerformed(evt);
+            }
+        });
 
         buttonCurteP.setText("CurtePost");
+        buttonCurteP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCurtePActionPerformed(evt);
+            }
+        });
 
         buttonComentario.setText("Comentario");
+        buttonComentario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonComentarioActionPerformed(evt);
+            }
+        });
 
         buttonCurteC.setText("CurteComentario");
+        buttonCurteC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCurteCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,6 +166,26 @@ public class TelaInicial extends javax.swing.JFrame {
         tabelaPost.show();
     }//GEN-LAST:event_buttonPostActionPerformed
 
+    private void buttonFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFotoActionPerformed
+        TabelaFoto tabelaFoto = new TabelaFoto();
+        tabelaFoto.show();
+    }//GEN-LAST:event_buttonFotoActionPerformed
+
+    private void buttonCurtePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCurtePActionPerformed
+        TabelaCurtePost tabelaCurteP = new TabelaCurtePost();
+        tabelaCurteP.show();
+    }//GEN-LAST:event_buttonCurtePActionPerformed
+
+    private void buttonComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonComentarioActionPerformed
+        TabelaComentario tabelaComentario = new TabelaComentario();
+        tabelaComentario.show();
+    }//GEN-LAST:event_buttonComentarioActionPerformed
+
+    private void buttonCurteCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCurteCActionPerformed
+       TabelaCurteComentario tabelaCurteC = new TabelaCurteComentario();
+       tabelaCurteC.show();
+    }//GEN-LAST:event_buttonCurteCActionPerformed
+    
 
     public static void main(String args[]) {
 

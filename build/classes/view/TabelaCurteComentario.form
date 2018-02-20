@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -120,13 +120,13 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="textIdPessoa1" min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Component id="textIdPessoa" min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="buttonAtualizarP" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="textIdPessoa2" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="textIdComentario" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -151,8 +151,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textIdPessoa2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textIdPessoa1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textIdComentario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textIdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -187,12 +187,12 @@
             <Property name="text" type="java.lang.String" value="Atualizar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textIdPessoa2">
+        <Component class="javax.swing.JTextField" name="textIdComentario">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdPessoa2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdComentarioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="textIdPessoa1">
+        <Component class="javax.swing.JTextField" name="textIdPessoa">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

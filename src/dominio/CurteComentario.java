@@ -16,7 +16,7 @@ public class CurteComentario {
         return idComentario;
     }
     
-    public void setIdPost(int idComentario){
+    public void setIdComentario(int idComentario){
         this.idComentario = idComentario;
     }   
 }

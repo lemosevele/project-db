@@ -9,15 +9,13 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class CurtePostDAO {
-    Connection con = ConnectionFactory.getConnection();
-    PreparedStatement stmt = null;
-    
-    public void create(CurtePost curtePost){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+    
+    public void create(CurtePost curtePost){
         
         try {
-            stmt = con.prepareStatement("insert into curtePost(idPessoa, idPost) values(?, ?");
+            stmt = con.prepareStatement("insert into curtepost(idPessoa, idPost) values(?, ?)");
             stmt.setInt(1, curtePost.getIdPessoa());
             stmt.setInt(2, curtePost.getIdPost());
             

@@ -147,21 +147,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Foto"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonFotoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonCurteP">
           <Properties>
             <Property name="text" type="java.lang.String" value="CurtePost"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCurtePActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonComentario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Comentario"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonComentarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonCurteC">
           <Properties>
             <Property name="text" type="java.lang.String" value="CurteComentario"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCurteCActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
