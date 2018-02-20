@@ -4,6 +4,12 @@ import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -34,6 +40,38 @@ public class ComentarioDAO {
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    
+    
+    
+    public List<Comentario> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+	List<Comentario> comentarios = new ArrayList<>();
+
+	try {
+            stmt = con.prepareStatement("select * from comentario");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Comentario comentario = new Comentario();
+                comentario.setId(rs.getInt("id"));
+                comentario.setTexto(rs.getString("texto"));
+		comentario.setData(rs.getString("datac"));
+		comentario.setIdPost(rs.getInt("idPost"));
+		comentario.setIdPessoa(rs.getInt("idPessoa"));
+
+                comentarios.add(comentario);
+                }
+
+	} catch (SQLException ex) {
+		Logger.getLogger(ComentarioDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+	} finally {
+		ConnectionFactory.closeConnection(con, stmt, rs);
+	}
+	return comentarios;
     }
 }
         

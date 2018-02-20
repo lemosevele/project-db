@@ -3,7 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import dominio.Post;
@@ -32,5 +37,35 @@ public class PostDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
+    
+    public List<Post> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+	List<Post> posts = new ArrayList<>();
+
+	try {
+            stmt = con.prepareStatement("select * from post");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Post post = new Post();
+		post.setId(rs.getInt("id"));
+		post.setData(rs.getString("datap"));
+		post.setTexto(rs.getString("texto"));		
+                post.setIdPessoa(rs.getInt("idPessoa"));
+
+                posts.add(post);
+                }
+
+	} catch (SQLException ex) {
+		Logger.getLogger(PostDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+	} finally {
+		ConnectionFactory.closeConnection(con, stmt, rs);
+	}
+	return posts;
+    }
+    
         
 }

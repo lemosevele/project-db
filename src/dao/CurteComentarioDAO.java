@@ -3,10 +3,16 @@ package dao;
 import connection.ConnectionFactory;
 import dominio.CurteComentario;
 
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CurteComentarioDAO {
     Connection con = ConnectionFactory.getConnection();
@@ -31,5 +37,33 @@ public class CurteComentarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
+    
+    public List<CurteComentario> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+	List<CurteComentario> curtidas = new ArrayList<>();
+
+	try {
+            stmt = con.prepareStatement("select * from curtecomentario");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                CurteComentario curteC = new CurteComentario();
+                curteC.setIdPessoa(rs.getInt("idPessoa"));
+                curteC.setIdComentario(rs.getInt("idComentario"));
+
+                curtidas.add(curteC);
+                }
+
+	} catch (SQLException ex) {
+		Logger.getLogger(CurteComentarioDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+	} finally {
+		ConnectionFactory.closeConnection(con, stmt, rs);
+	}
+	return curtidas;
+    }
+
     
 }

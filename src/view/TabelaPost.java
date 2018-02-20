@@ -11,7 +11,24 @@ public class TabelaPost extends javax.swing.JFrame {
 
     public TabelaPost() {
         initComponents();
+        readTabelaPost();
     }
+
+    public void readTabelaPost(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPost.getModel();
+        modelo.setNumRows(0);
+        
+        PostDAO postDAO = new PostDAO();
+        for(Post post: postDAO.read()){
+            modelo.addRow(new Object[] {
+		post.getId(),
+		post.getData(),
+		post.getTexto(),
+		post.getIdPessoa()
+            });
+        }
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,7 +47,7 @@ public class TabelaPost extends javax.swing.JFrame {
         textTexto = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaPost = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +147,7 @@ public class TabelaPost extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPost.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -138,12 +155,12 @@ public class TabelaPost extends javax.swing.JFrame {
                 "id", "texto", "data", "idPessoa"
             }
         ));
-        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaPost.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoaMouseClicked(evt);
+                tabelaPostMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoa);
+        jScrollPane1.setViewportView(tabelaPost);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,15 +208,17 @@ public class TabelaPost extends javax.swing.JFrame {
         post.setTexto(textTexto.getText());
         
         postDAO.create(post);
+        
+        readTabelaPost();
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
 
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
-    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+    private void tabelaPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPostMouseClicked
 
-    }//GEN-LAST:event_tabelaPessoaMouseClicked
+    }//GEN-LAST:event_tabelaPostMouseClicked
 
     
     public static void main(String args[]) {
@@ -222,7 +241,7 @@ public class TabelaPost extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaPost;
     private javax.swing.JTextField textData;
     private javax.swing.JTextField textIdPessoa;
     private javax.swing.JTextArea textTexto;

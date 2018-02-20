@@ -11,10 +11,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
     public TabelaPessoa() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        tabelaPessoa.setRowSorter(new TableRowSorter(modelo));
-        
-        //readTabelaPessoa();
+        readTabelaPessoa();
     }
     
     @SuppressWarnings("unchecked")
@@ -70,6 +67,11 @@ public class TabelaPessoa extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,6 +186,22 @@ public class TabelaPessoa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void readTabelaPessoa(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
+        modelo.setNumRows(0);
+        
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        for(Pessoa pessoa : pessoaDAO.read()){
+            modelo.addRow(new Object[] {
+                pessoa.getId(),
+                pessoa.getNome(),
+                pessoa.getIdade(),
+		pessoa.getFoto()
+            });
+        }
+    }
+
+    
     private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomeActionPerformed
@@ -192,23 +210,13 @@ public class TabelaPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdadeActionPerformed
 
-    public void readTabelaPessoa(){
-        //método que mostra o conteúdo da tabelas
-        DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-        modelo.setNumRows(0);
-        
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        
-        for(Pessoa pessoa: pessoaDAO.read()){
-            modelo.addRow(new Object[]{
-                pessoa.getId(),
-                pessoa.getNome(),
-                pessoa.getIdade(),
-                pessoa.getFoto()              
-            });
-        }
-    }
+   
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
+
+//       DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
+//       Object[] dados = {"id", textNome.getText(), textIdade.getText(), textFoto.getText()};
+//       modelo.addRow(dados);
+
         //insere uma pessoa no banco de dados.
         Pessoa pessoa = new Pessoa();
         PessoaDAO pessoaDAO = new PessoaDAO();
@@ -219,24 +227,38 @@ public class TabelaPessoa extends javax.swing.JFrame {
         
         pessoaDAO.create(pessoa);
         
-        //readTabelaPessoa();
+        readTabelaPessoa();
+      
     }//GEN-LAST:event_buttonInserirPActionPerformed
     
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-        if (tabelaPessoa.getSelectedRow() != -1){
-        Object[] dados = {textNome.getText(), textIdade.getText(), textFoto.getText()};             
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
+        
+        if(tabelaPessoa.getSelectedRow() != -1){
+            DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
+            modelo.removeRow(tabelaPessoa.getSelectedRow());
+        }else{
+            JOptionPane.showMessageDialog(null,"Selecione uma linha para ser excluída.");
         }
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
-        if (tabelaPessoa.getSelectedRow() != -1){
-                    
-        } else{
-            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada.");
+       //método de click do mouse
+       if(tabelaPessoa.getSelectedRow() != -1){
+            
+            textNome.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 1).toString());
+            textIdade.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 2).toString());
+            textFoto.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 3).toString());
         }
     }//GEN-LAST:event_tabelaPessoaMouseClicked
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaPessoa.getSelectedRow() != -1){
+            tabelaPessoa.setValueAt(textNome.getText(), tabelaPessoa.getSelectedRow(), 1);
+            tabelaPessoa.setValueAt(textIdade.getText(), tabelaPessoa.getSelectedRow(), 2);
+            tabelaPessoa.setValueAt(textFoto.getText(), tabelaPessoa.getSelectedRow(), 3);
+            
+        }
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     
     public static void main(String args[]) {

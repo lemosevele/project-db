@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import dominio.CurtePost;
 import dao.CurtePostDAO;
 
@@ -7,6 +11,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 
     public TabelaCurtePost() {
         initComponents();
+        readTabelaCurtePost();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -14,7 +20,7 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaCurteP = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
@@ -26,7 +32,7 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCurteP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -34,12 +40,12 @@ public class TabelaCurtePost extends javax.swing.JFrame {
                 "idPessoa1", "idPessoa2"
             }
         ));
-        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaCurteP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoaMouseClicked(evt);
+                tabelaCurtePMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoa);
+        jScrollPane1.setViewportView(tabelaCurteP);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -150,10 +156,24 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+    private void tabelaCurtePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurtePMouseClicked
 
-    }//GEN-LAST:event_tabelaPessoaMouseClicked
+    }//GEN-LAST:event_tabelaCurtePMouseClicked
 
+    public void readTabelaCurtePost(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCurteP.getModel();
+        modelo.setNumRows(0);
+        
+        CurtePostDAO curtePDAO = new CurtePostDAO();
+        for(CurtePost curteP: curtePDAO.read()){
+            modelo.addRow(new Object[] {
+                curteP.getIdPessoa(),
+		curteP.getIdPost()
+            });
+        }
+    }
+
+    
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
         CurtePost curteP = new CurtePost();
         CurtePostDAO curtePDAO = new CurtePostDAO();
@@ -162,6 +182,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         curteP.setIdPost(Integer.parseInt(textIdPost.getText()));
         
         curtePDAO.create(curteP);
+        
+        readTabelaCurtePost();
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
@@ -216,7 +238,7 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaCurteP;
     private javax.swing.JTextField textIdPessoa;
     private javax.swing.JTextField textIdPost;
     // End of variables declaration//GEN-END:variables

@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import dao.ComentarioDAO;
 import dominio.Comentario;
 
@@ -7,6 +11,7 @@ public class TabelaComentario extends javax.swing.JFrame {
 
     public TabelaComentario() {
         initComponents();
+        readTabelaComentario();
     }
 
     @SuppressWarnings("unchecked")
@@ -20,7 +25,7 @@ public class TabelaComentario extends javax.swing.JFrame {
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaComentario = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         textIdPessoa = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -56,7 +61,7 @@ public class TabelaComentario extends javax.swing.JFrame {
 
         buttonAtualizarP.setText("Atualizar");
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaComentario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -64,12 +69,12 @@ public class TabelaComentario extends javax.swing.JFrame {
                 "id", "idPessoa", "idPost", "data", "texto"
             }
         ));
-        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaComentario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoaMouseClicked(evt);
+                tabelaComentarioMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoa);
+        jScrollPane1.setViewportView(tabelaComentario);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,10 +201,25 @@ public class TabelaComentario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+    private void tabelaComentarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaComentarioMouseClicked
 
-    }//GEN-LAST:event_tabelaPessoaMouseClicked
+    }//GEN-LAST:event_tabelaComentarioMouseClicked
 
+    public void readTabelaComentario(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaComentario.getModel();
+        modelo.setNumRows(0);
+        
+        ComentarioDAO comentarioDAO = new ComentarioDAO();
+        for(Comentario comentario : comentarioDAO.read()){
+            modelo.addRow(new Object[] {
+                comentario.getId(),
+                comentario.getTexto(),
+                comentario.getData(),
+		comentario.getIdPost(),
+		comentario.getIdPessoa()
+            });
+        }
+    }
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
         ComentarioDAO comentarioDAO = new ComentarioDAO();
         Comentario comentario = new Comentario();
@@ -210,6 +230,8 @@ public class TabelaComentario extends javax.swing.JFrame {
         comentario.setIdPost(Integer.parseInt(textIdPost.getText()));
         
         comentarioDAO.create(comentario);
+        
+        readTabelaComentario();
         
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
@@ -257,7 +279,7 @@ public class TabelaComentario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaComentario;
     private javax.swing.JTextField textData;
     private javax.swing.JTextField textIdPessoa;
     private javax.swing.JTextField textIdPessoa4;

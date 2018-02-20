@@ -7,6 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CurtePostDAO {
         Connection con = ConnectionFactory.getConnection();
@@ -28,5 +34,32 @@ public class CurtePostDAO {
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    
+    public List<CurtePost> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+	List<CurtePost> curtidas = new ArrayList<>();
+
+	try {
+            stmt = con.prepareStatement("select * from curtepost");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                CurtePost curteP = new CurtePost();
+                curteP.setIdPessoa(rs.getInt("idPessoa"));
+                curteP.setIdPost(rs.getInt("idPost"));
+
+                curtidas.add(curteP);
+                }
+
+	} catch (SQLException ex) {
+		Logger.getLogger(CurtePostDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+	} finally {
+		ConnectionFactory.closeConnection(con, stmt, rs);
+	}
+	return curtidas;
     }
 }

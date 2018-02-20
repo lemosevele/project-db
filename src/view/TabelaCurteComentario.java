@@ -1,5 +1,9 @@
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import dominio.CurteComentario;
 import dao.CurteComentarioDAO;
 
@@ -7,6 +11,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
 
     public TabelaCurteComentario() {
         initComponents();
+        readTabelaCurteComentario();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -14,7 +19,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaCurteC = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
@@ -26,7 +31,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCurteC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -34,12 +39,12 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
                 "idPessoa", "idComentario"
             }
         ));
-        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaCurteC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoaMouseClicked(evt);
+                tabelaCurteCMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoa);
+        jScrollPane1.setViewportView(tabelaCurteC);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -150,10 +155,23 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+    private void tabelaCurteCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurteCMouseClicked
 
-    }//GEN-LAST:event_tabelaPessoaMouseClicked
+    }//GEN-LAST:event_tabelaCurteCMouseClicked
 
+    public void readTabelaCurteComentario(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaCurteC.getModel();
+        modelo.setNumRows(0);
+        
+        CurteComentarioDAO curteCDAO = new CurteComentarioDAO();
+        for(CurteComentario curteC: curteCDAO.read()){
+            modelo.addRow(new Object[] {
+                curteC.getIdPessoa(),
+		curteC.getIdComentario()
+            });
+        }
+    }
+    
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
        CurteComentarioDAO curteCDAO = new CurteComentarioDAO();
        CurteComentario curteC = new CurteComentario();
@@ -163,6 +181,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
        
        curteCDAO.create(curteC);
        
+       readTabelaCurteComentario();
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
@@ -191,7 +210,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaCurteC;
     private javax.swing.JTextField textIdComentario;
     private javax.swing.JTextField textIdPessoa;
     // End of variables declaration//GEN-END:variables

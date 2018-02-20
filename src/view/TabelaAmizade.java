@@ -11,6 +11,7 @@ public class TabelaAmizade extends javax.swing.JFrame {
 
     public TabelaAmizade() {
         initComponents();
+        readTabelaAmizade();
     }
     
     @SuppressWarnings("unchecked")
@@ -29,7 +30,7 @@ public class TabelaAmizade extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaPessoa = new javax.swing.JTable();
+        tabelaAmizade = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +84,6 @@ public class TabelaAmizade extends javax.swing.JFrame {
                         .addComponent(buttonAtualizarP)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(textRotulo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -116,7 +116,7 @@ public class TabelaAmizade extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        tabelaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAmizade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -124,12 +124,12 @@ public class TabelaAmizade extends javax.swing.JFrame {
                 "idPessoa1", "idPessoa2", "rotulo"
             }
         ));
-        tabelaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaAmizade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPessoaMouseClicked(evt);
+                tabelaAmizadeMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaPessoa);
+        jScrollPane1.setViewportView(tabelaAmizade);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,6 +170,20 @@ public class TabelaAmizade extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textRotuloActionPerformed
 
+    public void readTabelaAmizade(){
+        DefaultTableModel modelo = (DefaultTableModel) tabelaAmizade.getModel();
+        modelo.setNumRows(0);
+        
+        AmizadeDAO amizadeDAO = new AmizadeDAO();
+        for(Amizade amizade : amizadeDAO.read()){
+            modelo.addRow(new Object[] {
+                amizade.getIdPessoa1(),
+                amizade.getIdPessoa2(),
+                amizade.getRotulo()
+            });
+        }
+    }
+    
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
         Amizade amizade = new Amizade();
         AmizadeDAO amizadeDAO = new AmizadeDAO();
@@ -177,18 +191,19 @@ public class TabelaAmizade extends javax.swing.JFrame {
         amizade.setRotulo(textRotulo.getText());
         amizade.setIdPessoa1(Integer.parseInt(textIdPessoa1.getText()));
         amizade.setIdPessoa2(Integer.parseInt(textIdPessoa2.getText()));
-        
-        
+     
         amizadeDAO.create(amizade);
+        
+        readTabelaAmizade();
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
 
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
-    private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked
+    private void tabelaAmizadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAmizadeMouseClicked
 
-    }//GEN-LAST:event_tabelaPessoaMouseClicked
+    }//GEN-LAST:event_tabelaAmizadeMouseClicked
 
     
     public static void main(String args[]) {
@@ -210,7 +225,7 @@ public class TabelaAmizade extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaPessoa;
+    private javax.swing.JTable tabelaAmizade;
     private javax.swing.JTextField textIdPessoa1;
     private javax.swing.JTextField textIdPessoa2;
     private javax.swing.JTextField textRotulo;
