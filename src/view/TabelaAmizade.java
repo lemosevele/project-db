@@ -203,7 +203,13 @@ public class TabelaAmizade extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        Amizade amizade = new Amizade();
+        amizade.setIdPessoa1(Integer.parseInt(textIdPessoa1.getText()));
+        amizade.setIdPessoa2(Integer.parseInt(textIdPessoa2.getText()));
+        
+        AmizadeDAO amizadedao = new AmizadeDAO();
+        amizadedao.delete(amizade);
+        
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaAmizadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAmizadeMouseClicked

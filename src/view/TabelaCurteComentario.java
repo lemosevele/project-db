@@ -24,8 +24,8 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
-        textIdComentario = new javax.swing.JTextField();
-        textIdPessoa = new javax.swing.JTextField();
+        txtIdComent = new javax.swing.JTextField();
+        txtIdPessoa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -82,9 +82,15 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
             }
         });
 
-        textIdComentario.addActionListener(new java.awt.event.ActionListener() {
+        txtIdComent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdComentarioActionPerformed(evt);
+                txtIdComentActionPerformed(evt);
+            }
+        });
+
+        txtIdPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdPessoaActionPerformed(evt);
             }
         });
 
@@ -108,11 +114,11 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
                                 .addComponent(buttonExcluirP))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonAtualizarP)
-                            .addComponent(textIdComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdComent, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -130,8 +136,8 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textIdComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdComent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInserirP)
@@ -162,8 +168,8 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
 
     private void tabelaCurteCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurteCMouseClicked
         if(tabelaCurteC.getSelectedRow() != -1){
-            textIdPessoa.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 0).toString());
-            textIdComentario.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 1).toString());        
+            txtIdPessoa.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 0).toString());
+            txtIdComent.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 1).toString());        
 	}
     }//GEN-LAST:event_tabelaCurteCMouseClicked
 
@@ -184,8 +190,8 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
        CurteComentarioDAO curteCDAO = new CurteComentarioDAO();
        CurteComentario curteC = new CurteComentario();
        
-       curteC.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-       curteC.setIdComentario(Integer.parseInt(textIdComentario.getText()));
+       curteC.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+       curteC.setIdComentario(Integer.parseInt(txtIdComent.getText()));
        
        curteCDAO.create(curteC);
        
@@ -193,12 +199,18 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        CurteComentario curteComentario = new CurteComentario();
+        
+        curteComentario.setIdComentario(Integer.parseInt(txtIdComent.getText()));
+        curteComentario.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+        
+        CurteComentarioDAO curteComentariodao = new CurteComentarioDAO();
+        curteComentariodao.delete(curteComentario);
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
-    private void textIdComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdComentarioActionPerformed
+    private void txtIdComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdComentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIdComentarioActionPerformed
+    }//GEN-LAST:event_txtIdComentActionPerformed
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
         if(tabelaCurteC.getSelectedRow() != -1){
@@ -209,14 +221,18 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
             String idPessoa = tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 0).toString();
             String idComentario = tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 1).toString();
             
-            curteC.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-	    curteC.setIdComentario(Integer.parseInt(textIdComentario.getText()));
+            curteC.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+	    curteC.setIdComentario(Integer.parseInt(txtIdComent.getText()));
             curteCDAO.update(curteC, idPessoa, idComentario);
         
             readTabelaCurteComentario();
             
         }
     }//GEN-LAST:event_buttonAtualizarPActionPerformed
+
+    private void txtIdPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdPessoaActionPerformed
 
     public static void main(String args[]) {
 
@@ -237,7 +253,7 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaCurteC;
-    private javax.swing.JTextField textIdComentario;
-    private javax.swing.JTextField textIdPessoa;
+    private javax.swing.JTextField txtIdComent;
+    private javax.swing.JTextField txtIdPessoa;
     // End of variables declaration//GEN-END:variables
 }

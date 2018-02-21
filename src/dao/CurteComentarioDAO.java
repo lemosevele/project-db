@@ -70,7 +70,7 @@ public class CurteComentarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("update curtecomentario idPessoa = ?, idComentario = ? where idPessoa = ? and idComentario = ?");
+            stmt = con.prepareStatement("update curteComentario idPessoa = ?, idComentario = ? where idPessoa = ? and idComentario = ?");
             stmt.setInt(1, curteComentario.getIdPessoa());
             stmt.setInt(2, curteComentario.getIdComentario());
             stmt.setInt(3,Integer.parseInt(idPessoa));
@@ -85,6 +85,27 @@ public class CurteComentarioDAO {
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    
+    public void delete(CurteComentario curteComentario){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try{
+            stmt = con.prepareStatement("delete from curteComentario where idPessoa = ? and idComentario = ?");
+            stmt.setInt(1, curteComentario.getIdPessoa());
+            stmt.setInt(2, curteComentario.getIdComentario());
+            
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Deletato com sucesso.");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao deletar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
     }
 
     

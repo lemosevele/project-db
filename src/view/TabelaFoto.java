@@ -5,7 +5,10 @@
  */
 package view;
 
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -33,13 +36,13 @@ public class TabelaFoto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCurteP = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lbImagem = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
         textIdPost = new javax.swing.JTextField();
-        textIdPessoa = new javax.swing.JTextField();
+        txtFile = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         buttonInserirP2 = new javax.swing.JButton();
@@ -68,7 +71,7 @@ public class TabelaFoto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaCurteP);
 
-        jLabel1.setText("lbImagem");
+        lbImagem.setText("lbImagem");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -79,7 +82,7 @@ public class TabelaFoto extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -87,7 +90,7 @@ public class TabelaFoto extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addComponent(lbImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -139,7 +142,7 @@ public class TabelaFoto extends javax.swing.JFrame {
                                 .addGap(61, 61, 61)
                                 .addComponent(buttonExcluirP))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonInserirP2)))
                         .addGap(49, 49, 49)
@@ -164,7 +167,7 @@ public class TabelaFoto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonInserirP2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -217,8 +220,18 @@ public class TabelaFoto extends javax.swing.JFrame {
     private void buttonInserirP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirP2ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        //fileChooser.setFileFilter(ff);
-        fileChooser.showOpenDialog(this);
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("imagem", "jpg", "png"); 
+        
+        fileChooser.setFileFilter(filter);
+        int retorno = fileChooser.showOpenDialog(this);
+        
+        if(retorno == JFileChooser.APPROVE_OPTION){
+            
+            File file = fileChooser.getSelectedFile();
+            txtFile.setText(file.getPath());
+            lbImagem.setIcon(new ImageIcon(file.getPath()));
+        }
     }//GEN-LAST:event_buttonInserirP2ActionPerformed
 
     /**
@@ -263,14 +276,14 @@ public class TabelaFoto extends javax.swing.JFrame {
     private javax.swing.JButton buttonInserirP;
     private javax.swing.JButton buttonInserirP1;
     private javax.swing.JButton buttonInserirP2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbImagem;
     private javax.swing.JTable tabelaCurteP;
-    private javax.swing.JTextField textIdPessoa;
     private javax.swing.JTextField textIdPost;
+    private javax.swing.JTextField txtFile;
     // End of variables declaration//GEN-END:variables
 }

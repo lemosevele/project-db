@@ -96,6 +96,22 @@ public class ComentarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
+    public void delete(Comentario comentario){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try{
+            stmt = con.prepareStatement("delete from comentario where id = ?");
+            stmt.setInt(1,comentario.getId());
+            
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "deletado com sucesso.");
+        } catch (SQLException ex){
+            JOptionPane.showConfirmDialog(null, "Erro ao deletar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
     
 }
         

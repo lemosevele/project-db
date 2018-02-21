@@ -65,6 +65,8 @@ public class AmizadeDAO {
     }
     
     public void update(Amizade amizade){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;        
         
         try {
             stmt = con.prepareStatement("update amizade set idPessoa1 = ?, idPessoa2 = ?, rotulo = ? where idPessoa1 = ? and idPessoa2 = ?");
@@ -80,7 +82,28 @@ public class AmizadeDAO {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária");
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária" + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void delete(Amizade amizade){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("delete from amizade where idPessoa1 = ? and idPessoa2 = ?");
+            stmt.setInt(1, amizade.getIdPessoa1());
+            stmt.setInt(2, amizade.getIdPessoa2());
+                
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "deletado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao deletar chave primária " + ex );
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

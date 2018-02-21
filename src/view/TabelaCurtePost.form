@@ -120,13 +120,13 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="textIdPessoa" min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Component id="txtIdPessoa" min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="buttonAtualizarP" min="-2" max="-2" attributes="0"/>
-                              <Component id="textIdPost" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="txtIdPost" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -151,8 +151,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textIdPost" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textIdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIdPost" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -190,12 +190,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarPActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="textIdPost">
+        <Component class="javax.swing.JTextField" name="txtIdPost">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdPostActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdPostActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="textIdPessoa">
+        <Component class="javax.swing.JTextField" name="txtIdPessoa">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdPessoaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

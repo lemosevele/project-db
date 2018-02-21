@@ -51,7 +51,7 @@
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textIdPost" min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Component id="idPost" min="-2" pref="111" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       <Component id="textData" min="-2" pref="111" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -94,7 +94,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="textData" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textIdPost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idPost" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textIdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -257,9 +257,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textDataActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="textIdPost">
+    <Component class="javax.swing.JTextField" name="idPost">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdPostActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idPostActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textTexto">

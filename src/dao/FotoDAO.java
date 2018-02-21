@@ -31,4 +31,5 @@ public class FotoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
+    
 }

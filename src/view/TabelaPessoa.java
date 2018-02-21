@@ -229,12 +229,17 @@ public class TabelaPessoa extends javax.swing.JFrame {
     
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
         
-        if(tabelaPessoa.getSelectedRow() != -1){
+        /*if(tabelaPessoa.getSelectedRow() != -1){
             DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
             modelo.removeRow(tabelaPessoa.getSelectedRow());
         }else{
             JOptionPane.showMessageDialog(null,"Selecione uma linha para ser excluída.");
-        }
+        }*/
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(Integer.parseInt(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(),0).toString())); 
+        
+        PessoaDAO pessoadao = new PessoaDAO();
+        pessoadao.delete(pessoa);
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPessoaMouseClicked

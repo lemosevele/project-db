@@ -25,8 +25,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
-        textIdPost = new javax.swing.JTextField();
-        textIdPessoa = new javax.swing.JTextField();
+        txtIdPost = new javax.swing.JTextField();
+        txtIdPessoa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -91,9 +91,15 @@ public class TabelaCurtePost extends javax.swing.JFrame {
             }
         });
 
-        textIdPost.addActionListener(new java.awt.event.ActionListener() {
+        txtIdPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdPostActionPerformed(evt);
+                txtIdPostActionPerformed(evt);
+            }
+        });
+
+        txtIdPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdPessoaActionPerformed(evt);
             }
         });
 
@@ -117,11 +123,11 @@ public class TabelaCurtePost extends javax.swing.JFrame {
                                 .addComponent(buttonExcluirP))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonAtualizarP)
-                            .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -139,8 +145,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInserirP)
@@ -171,8 +177,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 
     private void tabelaCurtePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurtePMouseClicked
         if(tabelaCurteP.getSelectedRow() != -1){
-            textIdPessoa.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 0).toString());
-            textIdPost.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 1).toString());        
+            txtIdPessoa.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 0).toString());
+            txtIdPost.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 1).toString());        
 	}
     }//GEN-LAST:event_tabelaCurtePMouseClicked
 
@@ -194,8 +200,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         CurtePost curteP = new CurtePost();
         CurtePostDAO curtePDAO = new CurtePostDAO();
         
-        curteP.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-        curteP.setIdPost(Integer.parseInt(textIdPost.getText()));
+        curteP.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+        curteP.setIdPost(Integer.parseInt(txtIdPost.getText()));
         
         curtePDAO.create(curteP);
         
@@ -203,12 +209,18 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        CurtePost curtepost = new CurtePost();
+        
+        curtepost.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+        curtepost.setIdPost(Integer.parseInt(txtIdPost.getText()));
+        
+        CurtePostDAO curtepostdao = new CurtePostDAO();
+        curtepostdao.delete(curtepost);
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
-    private void textIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdPostActionPerformed
+    private void txtIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIdPostActionPerformed
+    }//GEN-LAST:event_txtIdPostActionPerformed
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
         if(tabelaCurteP.getSelectedRow() != -1){
@@ -216,8 +228,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 	    CurtePostDAO curtePDAO = new CurtePostDAO();
 
   
-            curteP.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-	    curteP.setIdPost(Integer.parseInt(textIdPost.getText()));
+            curteP.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
+	    curteP.setIdPost(Integer.parseInt(txtIdPost.getText()));
             curtePDAO.update(curteP);
         
             readTabelaCurtePost();
@@ -225,6 +237,10 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_buttonAtualizarPActionPerformed
+
+    private void txtIdPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdPessoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +287,7 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaCurteP;
-    private javax.swing.JTextField textIdPessoa;
-    private javax.swing.JTextField textIdPost;
+    private javax.swing.JTextField txtIdPessoa;
+    private javax.swing.JTextField txtIdPost;
     // End of variables declaration//GEN-END:variables
 }

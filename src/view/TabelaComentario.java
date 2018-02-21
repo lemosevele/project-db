@@ -31,7 +31,7 @@ public class TabelaComentario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         textData = new javax.swing.JTextField();
-        textIdPost = new javax.swing.JTextField();
+        idPost = new javax.swing.JTextField();
         textTexto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
@@ -134,9 +134,9 @@ public class TabelaComentario extends javax.swing.JFrame {
             }
         });
 
-        textIdPost.addActionListener(new java.awt.event.ActionListener() {
+        idPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdPostActionPerformed(evt);
+                idPostActionPerformed(evt);
             }
         });
 
@@ -166,7 +166,7 @@ public class TabelaComentario extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(idPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(38, 38, 38)
                                         .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
@@ -197,7 +197,7 @@ public class TabelaComentario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +218,7 @@ public class TabelaComentario extends javax.swing.JFrame {
         if(tabelaComentario.getSelectedRow() != -1){
             textTexto.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 4).toString());
             textData.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 3).toString());
-            textIdPost.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 2).toString());
+            idPost.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 2).toString());
             textIdPessoa.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 1).toString());
         }
     }//GEN-LAST:event_tabelaComentarioMouseClicked
@@ -245,7 +245,7 @@ public class TabelaComentario extends javax.swing.JFrame {
         comentario.setData(textData.getText());
         comentario.setTexto(textTexto.getText());
         comentario.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-        comentario.setIdPost(Integer.parseInt(textIdPost.getText()));
+        comentario.setIdPost(Integer.parseInt(idPost.getText()));
         
         comentarioDAO.create(comentario);
         
@@ -254,7 +254,13 @@ public class TabelaComentario extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        Comentario comentario = new Comentario();
+        
+        comentario.setId(Integer.parseInt(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(),0).toString()));
+        
+        ComentarioDAO comentarioDAO = new ComentarioDAO();
+        comentarioDAO.delete(comentario);
+        
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void textTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTextoActionPerformed
@@ -273,9 +279,9 @@ public class TabelaComentario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdPessoa4ActionPerformed
 
-    private void textIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdPostActionPerformed
+    private void idPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIdPostActionPerformed
+    }//GEN-LAST:event_idPostActionPerformed
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
         if(tabelaComentario.getSelectedRow() != -1){
@@ -285,7 +291,7 @@ public class TabelaComentario extends javax.swing.JFrame {
 
 	    comentario.setId((int)tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 0));    
             comentario.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
-            comentario.setIdPost(Integer.parseInt(textIdPost.getText()));
+            comentario.setIdPost(Integer.parseInt(idPost.getText()));
 	    comentario.setTexto(textTexto.getText());
             comentario.setData(textData.getText());
             comentarioDAO.update(comentario);
@@ -308,6 +314,7 @@ public class TabelaComentario extends javax.swing.JFrame {
     private javax.swing.JButton buttonAtualizarP;
     private javax.swing.JButton buttonExcluirP;
     private javax.swing.JButton buttonInserirP;
+    private javax.swing.JTextField idPost;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -319,7 +326,6 @@ public class TabelaComentario extends javax.swing.JFrame {
     private javax.swing.JTextField textData;
     private javax.swing.JTextField textIdPessoa;
     private javax.swing.JTextField textIdPessoa4;
-    private javax.swing.JTextField textIdPost;
     private javax.swing.JTextField textTexto;
     // End of variables declaration//GEN-END:variables
 }

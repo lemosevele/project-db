@@ -68,7 +68,7 @@ public class CurtePostDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("update curtePost idPessoa = ?, idPost = ? where idPessoa = ? and idPost = ?");
+            stmt = con.prepareStatement("update curtepost idPessoa = ? and idPost = ? where idPessoa = ? and idPost = ?");
             stmt.setInt(1, curtePost.getIdPessoa());
             stmt.setInt(2, curtePost.getIdPost());
             stmt.setInt(3, curtePost.getIdPessoa());
@@ -80,6 +80,25 @@ public class CurtePostDAO {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    public void delete(CurtePost curtePost){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("delete from curtePost where idPessoa = ? and idPost = ? ");
+            stmt.setInt(1, curtePost.getIdPessoa());
+            stmt.setInt(2, curtePost.getIdPost());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Deletado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Deletar " + ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

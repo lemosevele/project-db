@@ -88,7 +88,24 @@ public class PostDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+    public void delete(Post post){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("delete from post where id = ?");
+            stmt.setInt(1, post.getId());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Deletado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Deletar: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    } 
     
     
     

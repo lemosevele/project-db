@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JButton" name="buttonInserirP1">
       <Properties>
@@ -61,7 +61,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="lbImagem" min="-2" pref="170" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -71,7 +71,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="98" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel1" pref="97" max="32767" attributes="0"/>
+                  <Component id="lbImagem" pref="97" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -123,7 +123,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lbImagem">
           <Properties>
             <Property name="text" type="java.lang.String" value="lbImagem"/>
           </Properties>
@@ -147,7 +147,7 @@
                                   <Component id="buttonExcluirP" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="textIdPessoa" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="txtFile" min="-2" pref="153" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="buttonInserirP2" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -181,7 +181,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="textIdPost" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textIdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFile" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="buttonInserirP2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
@@ -222,7 +222,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdPostActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="textIdPessoa">
+        <Component class="javax.swing.JTextField" name="txtFile">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

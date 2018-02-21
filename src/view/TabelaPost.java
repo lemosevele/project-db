@@ -218,7 +218,11 @@ public class TabelaPost extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        Post post = new Post();
+        post.setId(Integer.parseInt(tabelaPost.getValueAt(tabelaPost.getSelectedRow(),0).toString()));
+        
+        PostDAO postdao = new PostDAO();
+        postdao.delete(post);
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPostMouseClicked
