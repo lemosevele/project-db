@@ -169,6 +169,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Atualizar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarPActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -181,11 +184,11 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
-                    <Column editable="true" title="id" type="java.lang.Object"/>
-                    <Column editable="true" title="idPessoa" type="java.lang.Object"/>
-                    <Column editable="true" title="idPost" type="java.lang.Object"/>
-                    <Column editable="true" title="data" type="java.lang.Object"/>
-                    <Column editable="true" title="texto" type="java.lang.Object"/>
+                    <Column editable="false" title="id" type="java.lang.Object"/>
+                    <Column editable="false" title="idPessoa" type="java.lang.Object"/>
+                    <Column editable="false" title="idPost" type="java.lang.Object"/>
+                    <Column editable="false" title="data" type="java.lang.Object"/>
+                    <Column editable="false" title="texto" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

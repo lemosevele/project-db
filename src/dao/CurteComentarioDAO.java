@@ -64,6 +64,28 @@ public class CurteComentarioDAO {
 	}
 	return curtidas;
     }
+    
+    public void update(CurteComentario curteComentario, String idPessoa, String idComentario){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("update curtecomentario idPessoa = ?, idComentario = ? where idPessoa = ? and idComentario = ?");
+            stmt.setInt(1, curteComentario.getIdPessoa());
+            stmt.setInt(2, curteComentario.getIdComentario());
+            stmt.setInt(3,Integer.parseInt(idPessoa));
+            stmt.setInt(4, Integer.parseInt(idComentario));
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária." + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
 
     
 }

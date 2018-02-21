@@ -72,8 +72,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
-                    <Column editable="true" title="idPessoa1" type="java.lang.Object"/>
-                    <Column editable="true" title="idPessoa2" type="java.lang.Object"/>
+                    <Column editable="false" title="idPessoa1" type="java.lang.Object"/>
+                    <Column editable="false" title="idPost" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -186,6 +186,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Atualizar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAtualizarPActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textIdPost">
           <Events>

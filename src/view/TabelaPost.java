@@ -22,8 +22,8 @@ public class TabelaPost extends javax.swing.JFrame {
         for(Post post: postDAO.read()){
             modelo.addRow(new Object[] {
 		post.getId(),
+                post.getTexto(),
 		post.getData(),
-		post.getTexto(),
 		post.getIdPessoa()
             });
         }
@@ -74,6 +74,11 @@ public class TabelaPost extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Data");
 
@@ -217,8 +222,29 @@ public class TabelaPost extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPostMouseClicked
-
+        if(tabelaPost.getSelectedRow() != -1){
+            textTexto.setText(tabelaPost.getValueAt(tabelaPost.getSelectedRow(), 1).toString());
+            textData.setText(tabelaPost.getValueAt(tabelaPost.getSelectedRow(), 2).toString());
+            textIdPessoa.setText(tabelaPost.getValueAt(tabelaPost.getSelectedRow(), 3).toString());
+        }
     }//GEN-LAST:event_tabelaPostMouseClicked
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaPost.getSelectedRow() != -1){
+            Post post = new Post();
+	    PostDAO postDAO = new PostDAO();
+            
+
+	    post.setId((int)tabelaPost.getValueAt(tabelaPost.getSelectedRow(), 0));    
+            post.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
+	    post.setTexto(textTexto.getText());
+            post.setData(textData.getText());
+            postDAO.update(post);
+        
+            readTabelaPost();
+            
+        }
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     
     public static void main(String args[]) {

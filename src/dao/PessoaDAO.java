@@ -17,7 +17,8 @@ import connection.ConnectionFactory;
 
 public class PessoaDAO {
         Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;    
+        PreparedStatement stmt = null;   
+        
     public void create(Pessoa pessoa){
         
         try {
@@ -64,6 +65,26 @@ public class PessoaDAO {
 		ConnectionFactory.closeConnection(con, stmt, rs);
 	}
 	return pessoas;
+    }
+    
+    public void update(Pessoa pessoa){
+        
+        try {
+            stmt = con.prepareStatement("update pessoa set nome = ?, idade = ?, foto = ? where id = ?");
+            stmt.setString(1, pessoa.getNome());
+            stmt.setInt(2, pessoa.getIdade());
+            stmt.setString(3, pessoa.getFoto());
+            stmt.setInt(4, pessoa.getId());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
           
 }

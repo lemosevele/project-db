@@ -67,5 +67,29 @@ public class PostDAO {
 	return posts;
     }
     
+    public void update(Post post){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
         
+        try {
+            stmt = con.prepareStatement("update post set datap = ?, texto = ?, idPessoa = ? where id = ?");
+            stmt.setString(1, post.getData());
+            stmt.setString(2, post.getTexto());
+            stmt.setInt(3, post.getIdPessoa());
+            stmt.setInt(4, post.getId());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    
+    
+    
 }

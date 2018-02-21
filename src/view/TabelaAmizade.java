@@ -57,6 +57,11 @@ public class TabelaAmizade extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("idPessoa1");
 
@@ -202,8 +207,29 @@ public class TabelaAmizade extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaAmizadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAmizadeMouseClicked
-
+        if(tabelaAmizade.getSelectedRow() != -1){
+            
+            textIdPessoa1.setText(tabelaAmizade.getValueAt(tabelaAmizade.getSelectedRow(), 0).toString());
+            textIdPessoa2.setText(tabelaAmizade.getValueAt(tabelaAmizade.getSelectedRow(), 1).toString());
+            textRotulo.setText(tabelaAmizade.getValueAt(tabelaAmizade.getSelectedRow(), 2).toString());
+        }
     }//GEN-LAST:event_tabelaAmizadeMouseClicked
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaAmizade.getSelectedRow() != -1){
+            Amizade amizade = new Amizade();
+            AmizadeDAO amizadeDAO = new AmizadeDAO();
+                
+            amizade.setRotulo(textRotulo.getText());
+            amizade.setIdPessoa1(Integer.parseInt(textIdPessoa1.getText()));
+            amizade.setIdPessoa2(Integer.parseInt(textIdPessoa2.getText()));
+     
+            amizadeDAO.update(amizade);
+        
+            readTabelaAmizade();
+            
+        }
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     
     public static void main(String args[]) {

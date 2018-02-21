@@ -60,6 +60,11 @@ public class TabelaComentario extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         tabelaComentario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,7 +73,15 @@ public class TabelaComentario extends javax.swing.JFrame {
             new String [] {
                 "id", "idPessoa", "idPost", "data", "texto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaComentario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaComentarioMouseClicked(evt);
@@ -202,7 +215,12 @@ public class TabelaComentario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaComentarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaComentarioMouseClicked
-
+        if(tabelaComentario.getSelectedRow() != -1){
+            textTexto.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 4).toString());
+            textData.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 3).toString());
+            textIdPost.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 2).toString());
+            textIdPessoa.setText(tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 1).toString());
+        }
     }//GEN-LAST:event_tabelaComentarioMouseClicked
 
     public void readTabelaComentario(){
@@ -213,10 +231,10 @@ public class TabelaComentario extends javax.swing.JFrame {
         for(Comentario comentario : comentarioDAO.read()){
             modelo.addRow(new Object[] {
                 comentario.getId(),
-                comentario.getTexto(),
+                comentario.getIdPessoa(),
+                comentario.getIdPost(),
                 comentario.getData(),
-		comentario.getIdPost(),
-		comentario.getIdPessoa()
+                comentario.getTexto()
             });
         }
     }
@@ -258,6 +276,24 @@ public class TabelaComentario extends javax.swing.JFrame {
     private void textIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdPostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdPostActionPerformed
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaComentario.getSelectedRow() != -1){
+            Comentario comentario = new Comentario();
+            ComentarioDAO comentarioDAO = new ComentarioDAO();
+            
+
+	    comentario.setId((int)tabelaComentario.getValueAt(tabelaComentario.getSelectedRow(), 0));    
+            comentario.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
+            comentario.setIdPost(Integer.parseInt(textIdPost.getText()));
+	    comentario.setTexto(textTexto.getText());
+            comentario.setData(textData.getText());
+            comentarioDAO.update(comentario);
+        
+            readTabelaComentario();
+            
+        }
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     public static void main(String args[]) {
 

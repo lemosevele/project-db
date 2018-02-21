@@ -187,6 +187,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void readTabelaPessoa(){
+        //exibe tabela com dados
         DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
         modelo.setNumRows(0);
         
@@ -212,11 +213,6 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
    
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
-
-//       DefaultTableModel modelo = (DefaultTableModel) tabelaPessoa.getModel();
-//       Object[] dados = {"id", textNome.getText(), textIdade.getText(), textFoto.getText()};
-//       modelo.addRow(dados);
-
         //insere uma pessoa no banco de dados.
         Pessoa pessoa = new Pessoa();
         PessoaDAO pessoaDAO = new PessoaDAO();
@@ -253,9 +249,16 @@ public class TabelaPessoa extends javax.swing.JFrame {
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
         if(tabelaPessoa.getSelectedRow() != -1){
-            tabelaPessoa.setValueAt(textNome.getText(), tabelaPessoa.getSelectedRow(), 1);
-            tabelaPessoa.setValueAt(textIdade.getText(), tabelaPessoa.getSelectedRow(), 2);
-            tabelaPessoa.setValueAt(textFoto.getText(), tabelaPessoa.getSelectedRow(), 3);
+            Pessoa pessoa = new Pessoa();
+            PessoaDAO pessoaDAO = new PessoaDAO();
+                
+            pessoa.setNome(textNome.getText());
+            pessoa.setIdade(Integer.parseInt(textIdade.getText()));
+            pessoa.setFoto(textFoto.getText());
+            pessoa.setId((int)tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 0));
+            pessoaDAO.update(pessoa);
+        
+            readTabelaPessoa();
             
         }
     }//GEN-LAST:event_buttonAtualizarPActionPerformed

@@ -76,6 +76,11 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         textIdComentario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +161,10 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaCurteCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurteCMouseClicked
-
+        if(tabelaCurteC.getSelectedRow() != -1){
+            textIdPessoa.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 0).toString());
+            textIdComentario.setText(tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 1).toString());        
+	}
     }//GEN-LAST:event_tabelaCurteCMouseClicked
 
     public void readTabelaCurteComentario(){
@@ -191,6 +199,24 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
     private void textIdComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdComentarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdComentarioActionPerformed
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaCurteC.getSelectedRow() != -1){
+            CurteComentario curteC = new CurteComentario();
+	    CurteComentarioDAO curteCDAO = new CurteComentarioDAO();
+            
+            
+            String idPessoa = tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 0).toString();
+            String idComentario = tabelaCurteC.getValueAt(tabelaCurteC.getSelectedRow(), 1).toString();
+            
+            curteC.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
+	    curteC.setIdComentario(Integer.parseInt(textIdComentario.getText()));
+            curteCDAO.update(curteC, idPessoa, idComentario);
+        
+            readTabelaCurteComentario();
+            
+        }
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     public static void main(String args[]) {
 

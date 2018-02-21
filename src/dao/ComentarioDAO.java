@@ -73,6 +73,30 @@ public class ComentarioDAO {
 	}
 	return comentarios;
     }
+    
+    public void update(Comentario comentario){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("update comentario set datac = ?, texto = ?, idPessoa = ?, idPost =? where id = ?");
+            stmt.setString(1, comentario.getData());
+            stmt.setString(2, comentario.getTexto());
+            stmt.setInt(3, comentario.getIdPessoa());
+            stmt.setInt(4, comentario.getIdPost());
+	    stmt.setInt(5, comentario.getId());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
 }
         
 

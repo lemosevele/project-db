@@ -62,4 +62,26 @@ public class CurtePostDAO {
 	}
 	return curtidas;
     }
+    
+    public void update(CurtePost curtePost){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("update curtePost idPessoa = ?, idPost = ? where idPessoa = ? and idPost = ?");
+            stmt.setInt(1, curtePost.getIdPessoa());
+            stmt.setInt(2, curtePost.getIdPost());
+            stmt.setInt(3, curtePost.getIdPessoa());
+            stmt.setInt(4, curtePost.getIdPost());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
 }

@@ -63,4 +63,28 @@ public class AmizadeDAO {
 	}
 	return amizadeList;      
     }
+    
+    public void update(Amizade amizade){
+        
+        try {
+            stmt = con.prepareStatement("update amizade set idPessoa1 = ?, idPessoa2 = ?, rotulo = ? where idPessoa1 = ? and idPessoa2 = ?");
+            stmt.setInt(1, amizade.getIdPessoa1());
+            stmt.setInt(2, amizade.getIdPessoa2());
+            stmt.setString(3, amizade.getRotulo());
+            stmt.setInt(4, amizade.getIdPessoa1());
+            stmt.setInt(5, amizade.getIdPessoa2());
+            
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária");
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    
 }

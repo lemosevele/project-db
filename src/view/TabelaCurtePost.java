@@ -37,9 +37,17 @@ public class TabelaCurtePost extends javax.swing.JFrame {
 
             },
             new String [] {
-                "idPessoa1", "idPessoa2"
+                "idPessoa1", "idPost"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaCurteP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaCurtePMouseClicked(evt);
@@ -77,6 +85,11 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
 
         textIdPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +170,10 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaCurtePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurtePMouseClicked
-
+        if(tabelaCurteP.getSelectedRow() != -1){
+            textIdPessoa.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 0).toString());
+            textIdPost.setText(tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 1).toString());        
+	}
     }//GEN-LAST:event_tabelaCurtePMouseClicked
 
     public void readTabelaCurtePost(){
@@ -193,6 +209,22 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     private void textIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdPostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdPostActionPerformed
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(tabelaCurteP.getSelectedRow() != -1){
+            CurtePost curteP = new CurtePost();
+	    CurtePostDAO curtePDAO = new CurtePostDAO();
+
+  
+            curteP.setIdPessoa(Integer.parseInt(textIdPessoa.getText()));
+	    curteP.setIdPost(Integer.parseInt(textIdPost.getText()));
+            curtePDAO.update(curteP);
+        
+            readTabelaCurtePost();
+            
+        }
+
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     /**
      * @param args the command line arguments
