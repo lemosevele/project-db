@@ -73,8 +73,6 @@ public class TabelaFoto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaFoto);
 
-        lbImagem.setText("lbImagem");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -229,6 +227,8 @@ public class TabelaFoto extends javax.swing.JFrame {
         FotoDAO fotodao = new FotoDAO();
         foto.setIdPost(Integer.parseInt(txtIdPost.getText()));
         fotodao.create(foto);
+        
+        readTabelaFoto();
         
     }//GEN-LAST:event_buttonInserirPActionPerformed
 

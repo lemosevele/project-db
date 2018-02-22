@@ -24,7 +24,6 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
-        buttonAtualizarP = new javax.swing.JButton();
         txtIdPost = new javax.swing.JTextField();
         txtIdPessoa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -84,13 +83,6 @@ public class TabelaCurtePost extends javax.swing.JFrame {
             }
         });
 
-        buttonAtualizarP.setText("Atualizar");
-        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAtualizarPActionPerformed(evt);
-            }
-        });
-
         txtIdPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdPostActionPerformed(evt);
@@ -112,29 +104,24 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(buttonInserirP)
-                                .addGap(50, 50, 50)
-                                .addComponent(buttonExcluirP))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonAtualizarP)
-                            .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(206, 206, 206)
-                        .addComponent(jLabel3)
-                        .addGap(97, 97, 97))))
+                        .addGap(126, 126, 126)
+                        .addComponent(buttonInserirP)
+                        .addGap(65, 65, 65)
+                        .addComponent(buttonExcluirP)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(206, 206, 206)
+                .addComponent(jLabel3)
+                .addGap(97, 97, 97))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,8 +137,7 @@ public class TabelaCurtePost extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInserirP)
-                    .addComponent(buttonExcluirP)
-                    .addComponent(buttonAtualizarP))
+                    .addComponent(buttonExcluirP))
                 .addGap(19, 19, 19))
         );
 
@@ -224,24 +210,6 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdPostActionPerformed
 
-    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
-        if(tabelaCurteP.getSelectedRow() != -1){
-            CurtePost curteP = new CurtePost();
-	    CurtePostDAO curtePDAO = new CurtePostDAO();
-            
-            String oldPessoa1 = tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 0).toString();
-            String oldPessoa2 = tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 1).toString();
-  
-            curteP.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
-	    curteP.setIdPost(Integer.parseInt(txtIdPost.getText()));
-            curtePDAO.update(curteP, oldPessoa1, oldPessoa2);
-        
-            readTabelaCurtePost();
-            
-        }
-
-    }//GEN-LAST:event_buttonAtualizarPActionPerformed
-
     private void txtIdPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPessoaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdPessoaActionPerformed
@@ -282,7 +250,6 @@ public class TabelaCurtePost extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAtualizarP;
     private javax.swing.JButton buttonExcluirP;
     private javax.swing.JButton buttonInserirP;
     private javax.swing.JLabel jLabel2;

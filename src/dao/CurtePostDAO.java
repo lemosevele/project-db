@@ -63,27 +63,7 @@ public class CurtePostDAO {
 	return curtidas;
     }
     
-    public void update(CurtePost curtePost, String oldPessoa1, String oldPessoa2){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = con.prepareStatement("update curtePost set idPessoa = ?, idPost = ? where idPessoa = ? and idPost = ?");
-            stmt.setInt(1, curtePost.getIdPessoa());
-            stmt.setInt(2, curtePost.getIdPost());
-            stmt.setInt(3, Integer.parseInt(oldPessoa1));
-            stmt.setInt(4, Integer.parseInt(oldPessoa2));
-            
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar " + ex);
-        } finally{
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
+   
     public void delete(CurtePost curtePost){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
