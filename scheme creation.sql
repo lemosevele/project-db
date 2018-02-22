@@ -6,20 +6,23 @@ create table pessoa(
 	id integer primary key auto_increment not null,
 	nome varchar(30),
 	idade int,
-	foto varchar(300));
+	foto varchar(300) not null);
 
 create table amizade(
 	idPessoa1 integer not null,
 	idPessoa2 integer not null,
-	rotulo varchar(300),
+	rotulo varchar(50) not null,
 
+	primary key(idPessoa1, idPessoa2),
+    
 	foreign key (idPessoa1) references pessoa(id)
 		on delete cascade
 		on update cascade,
 	foreign key(idPessoa2) references pessoa(id)
 		on delete cascade
 		on update cascade);
-
+	
+   
 create table post(
 	id integer primary key auto_increment not null,
 	datap char(10),
@@ -32,7 +35,7 @@ create table post(
 
 create table foto(
 	id integer primary key auto_increment not null,
-	imagem varchar(300),
+	imagem varchar(300) not null,
 	idPost int,
 	
 	foreign key(idPost) references post(id)
@@ -42,7 +45,8 @@ create table foto(
 create table curtePost(
 	idPessoa int,
 	idPost int,
-	
+    
+	primary key(idPessoa, idPost),
 	foreign key(idPessoa) references pessoa(id)
 		on delete cascade
 		on update cascade,
@@ -68,11 +72,10 @@ create table curteComentario(
 	idPessoa int,
 	idComentario int,
 	
+    primary key(idPessoa, idComentario),
 	foreign key(idPessoa) references pessoa(id)
 		on delete cascade
 		on update cascade,
 	foreign key(idComentario) references comentario(id)
 		on delete cascade
 		on update cascade);
-
-
