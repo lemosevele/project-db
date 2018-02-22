@@ -229,8 +229,11 @@ public class TabelaAmizade extends javax.swing.JFrame {
             amizade.setRotulo(textRotulo.getText());
             amizade.setIdPessoa1(Integer.parseInt(textIdPessoa1.getText()));
             amizade.setIdPessoa2(Integer.parseInt(textIdPessoa2.getText()));
+            
+            String oldPessoa1 = tabelaAmizade.getValueAt(tabelaAmizade.getSelectedRow(), 0).toString();
+            String oldPessoa2 = tabelaAmizade.getValueAt(tabelaAmizade.getSelectedRow(), 1).toString();
      
-            amizadeDAO.update(amizade);
+            amizadeDAO.update(amizade, oldPessoa1, oldPessoa2);
         
             readTabelaAmizade();
             

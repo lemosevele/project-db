@@ -226,11 +226,13 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         if(tabelaCurteP.getSelectedRow() != -1){
             CurtePost curteP = new CurtePost();
 	    CurtePostDAO curtePDAO = new CurtePostDAO();
-
+            
+            String oldPessoa1 = tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 0).toString();
+            String oldPessoa2 = tabelaCurteP.getValueAt(tabelaCurteP.getSelectedRow(), 1).toString();
   
             curteP.setIdPessoa(Integer.parseInt(txtIdPessoa.getText()));
 	    curteP.setIdPost(Integer.parseInt(txtIdPost.getText()));
-            curtePDAO.update(curteP);
+            curtePDAO.update(curteP, oldPessoa1, oldPessoa2);
         
             readTabelaCurtePost();
             

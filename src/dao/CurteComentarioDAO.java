@@ -23,7 +23,7 @@ public class CurteComentarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("insert into curtecomentario(idPessoa, idComentario) values(?, ?)");
+            stmt = con.prepareStatement("insert into curteComentario(idPessoa, idComentario) values(?, ?)");
             stmt.setInt(1, curteComentario.getIdPessoa());
             stmt.setInt(2, curteComentario.getIdComentario());
             
@@ -46,7 +46,7 @@ public class CurteComentarioDAO {
 	List<CurteComentario> curtidas = new ArrayList<>();
 
 	try {
-            stmt = con.prepareStatement("select * from curtecomentario");
+            stmt = con.prepareStatement("select * from curteComentario");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

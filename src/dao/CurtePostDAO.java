@@ -21,7 +21,7 @@ public class CurtePostDAO {
     public void create(CurtePost curtePost){
         
         try {
-            stmt = con.prepareStatement("insert into curtepost(idPessoa, idPost) values(?, ?)");
+            stmt = con.prepareStatement("insert into curtePost(idPessoa, idPost) values(?, ?)");
             stmt.setInt(1, curtePost.getIdPessoa());
             stmt.setInt(2, curtePost.getIdPost());
             
@@ -44,7 +44,7 @@ public class CurtePostDAO {
 	List<CurtePost> curtidas = new ArrayList<>();
 
 	try {
-            stmt = con.prepareStatement("select * from curtepost");
+            stmt = con.prepareStatement("select * from curtePost");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -63,16 +63,16 @@ public class CurtePostDAO {
 	return curtidas;
     }
     
-    public void update(CurtePost curtePost){
+    public void update(CurtePost curtePost, String oldPessoa1, String oldPessoa2){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("update curtepost idPessoa = ? and idPost = ? where idPessoa = ? and idPost = ?");
+            stmt = con.prepareStatement("update curtePost set idPessoa = ?, idPost = ? where idPessoa = ? and idPost = ?");
             stmt.setInt(1, curtePost.getIdPessoa());
             stmt.setInt(2, curtePost.getIdPost());
-            stmt.setInt(3, curtePost.getIdPessoa());
-            stmt.setInt(4, curtePost.getIdPost());
+            stmt.setInt(3, Integer.parseInt(oldPessoa1));
+            stmt.setInt(4, Integer.parseInt(oldPessoa2));
             
             stmt.executeUpdate();
             

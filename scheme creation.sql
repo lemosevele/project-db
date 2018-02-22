@@ -1,4 +1,4 @@
-﻿drop schema if exists projeto_bd;
+drop schema if exists projeto_bd;
 create schema projeto_bd;
 use projeto_bd;
 

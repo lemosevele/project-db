@@ -1,4 +1,4 @@
-﻿insert into pessoa(nome, idade ,foto) values ("luiza", 22, "foto");
+insert into pessoa(nome, idade ,foto) values ("luiza", 22, "foto");
 insert into pessoa(nome, idade ,foto) values ("vitória", 42, "foto");
 insert into pessoa(nome, idade ,foto) values ("pedro", 13, "foto");
 insert into pessoa(nome, idade ,foto) values ("douglas", 45, "foto");
