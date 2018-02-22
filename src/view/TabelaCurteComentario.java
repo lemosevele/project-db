@@ -38,7 +38,15 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
             new String [] {
                 "idPessoa", "idComentario"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaCurteC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaCurteCMouseClicked(evt);
@@ -206,6 +214,8 @@ public class TabelaCurteComentario extends javax.swing.JFrame {
         
         CurteComentarioDAO curteComentariodao = new CurteComentarioDAO();
         curteComentariodao.delete(curteComentario);
+        
+        readTabelaCurteComentario();
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void txtIdComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdComentActionPerformed

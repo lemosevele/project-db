@@ -70,7 +70,7 @@ public class CurteComentarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("update curteComentario idPessoa = ?, idComentario = ? where idPessoa = ? and idComentario = ?");
+            stmt = con.prepareStatement("update curteComentario set idPessoa = ?, idComentario = ? where idPessoa = ? and idComentario = ?");
             stmt.setInt(1, curteComentario.getIdPessoa());
             stmt.setInt(2, curteComentario.getIdComentario());
             stmt.setInt(3,Integer.parseInt(idPessoa));
@@ -81,7 +81,7 @@ public class CurteComentarioDAO {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária." + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

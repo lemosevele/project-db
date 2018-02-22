@@ -159,7 +159,15 @@ public class TabelaPost extends javax.swing.JFrame {
             new String [] {
                 "id", "texto", "data", "idPessoa"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaPost.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaPostMouseClicked(evt);
@@ -223,6 +231,8 @@ public class TabelaPost extends javax.swing.JFrame {
         
         PostDAO postdao = new PostDAO();
         postdao.delete(post);
+        
+        readTabelaPost();
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void tabelaPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPostMouseClicked

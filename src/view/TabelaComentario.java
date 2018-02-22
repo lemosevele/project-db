@@ -261,6 +261,7 @@ public class TabelaComentario extends javax.swing.JFrame {
         ComentarioDAO comentarioDAO = new ComentarioDAO();
         comentarioDAO.delete(comentario);
         
+        readTabelaComentario();
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void textTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTextoActionPerformed

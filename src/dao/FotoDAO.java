@@ -65,25 +65,22 @@ public class FotoDAO {
 	return fotos;
     }
     
-    public void update(Foto foto, String imagem, String idPost){
+    public void update(Foto foto){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("update foto id = ?, imagem = ? and idPost = ? where id = ?, imagem = ? and idPost = ?");
-            stmt.setInt(1, foto.getId());
-            stmt.setString(2, foto.getImagem());
-            stmt.setInt(3, foto.getIdPost());
-            stmt.setInt(4, foto.getId());
-            stmt.setString(5, imagem);
-            stmt.setInt(6, Integer.parseInt(idPost));
+            stmt = con.prepareStatement("update foto set imagem = ?, idPost = ? where id = ?");
+            stmt.setString(1, foto.getImagem());
+            stmt.setInt(2, foto.getIdPost());
+            stmt.setInt(3, foto.getId());
             
             stmt.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária." + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -94,17 +91,15 @@ public class FotoDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("delete from foto where id = ?, imagem = ? and idPost = ?");
+            stmt = con.prepareStatement("delete from foto where id = ?");
             stmt.setInt(1, foto.getId());
-            stmt.setString(2, foto.getImagem());
-            stmt.setInt(3, foto.getIdPost());
             
             stmt.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Deletado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao deletar chave primária." + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao deletar: " + ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

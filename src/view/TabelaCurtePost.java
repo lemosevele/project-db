@@ -216,6 +216,8 @@ public class TabelaCurtePost extends javax.swing.JFrame {
         
         CurtePostDAO curtepostdao = new CurtePostDAO();
         curtepostdao.delete(curtepost);
+        
+        readTabelaCurtePost();
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
     private void txtIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPostActionPerformed

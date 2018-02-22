@@ -128,7 +128,15 @@ public class TabelaAmizade extends javax.swing.JFrame {
             new String [] {
                 "idPessoa1", "idPessoa2", "rotulo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaAmizade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaAmizadeMouseClicked(evt);
@@ -209,6 +217,8 @@ public class TabelaAmizade extends javax.swing.JFrame {
         
         AmizadeDAO amizadedao = new AmizadeDAO();
         amizadedao.delete(amizade);
+        
+        readTabelaAmizade();
         
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 

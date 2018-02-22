@@ -82,7 +82,7 @@ public class AmizadeDAO {
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar chave primária" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -103,7 +103,7 @@ public class AmizadeDAO {
             JOptionPane.showMessageDialog(null, "deletado com sucesso.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao deletar chave primária " + ex );
+            JOptionPane.showMessageDialog(null, "Erro ao deletar: " + ex );
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
