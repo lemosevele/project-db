@@ -5,10 +5,17 @@
  */
 package view;
 
+import dao.CurteComentarioDAO;
+import dao.FotoDAO;
+import dao.PessoaDAO;
+import dominio.CurteComentario;
+import dominio.Foto;
+import dominio.Pessoa;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,8 +26,11 @@ public class TabelaFoto extends javax.swing.JFrame {
     /**
      * Creates new form Foto
      */
+    
+    private Foto foto = new Foto();
     public TabelaFoto() {
         initComponents();
+        readTabelaFoto();
     }
 
     /**
@@ -35,13 +45,13 @@ public class TabelaFoto extends javax.swing.JFrame {
         buttonInserirP1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCurteP = new javax.swing.JTable();
+        TabelaFoto = new javax.swing.JTable();
         lbImagem = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonInserirP = new javax.swing.JButton();
         buttonExcluirP = new javax.swing.JButton();
         buttonAtualizarP = new javax.swing.JButton();
-        textIdPost = new javax.swing.JTextField();
+        txtIdPost = new javax.swing.JTextField();
         txtFile = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,7 +66,7 @@ public class TabelaFoto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabelaCurteP.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaFoto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -64,12 +74,12 @@ public class TabelaFoto extends javax.swing.JFrame {
                 "id", "idPost", "imagem"
             }
         ));
-        tabelaCurteP.addMouseListener(new java.awt.event.MouseAdapter() {
+        TabelaFoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaCurtePMouseClicked(evt);
+                TabelaFotoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaCurteP);
+        jScrollPane1.setViewportView(TabelaFoto);
 
         lbImagem.setText("lbImagem");
 
@@ -109,10 +119,15 @@ public class TabelaFoto extends javax.swing.JFrame {
         });
 
         buttonAtualizarP.setText("Atualizar");
-
-        textIdPost.addActionListener(new java.awt.event.ActionListener() {
+        buttonAtualizarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIdPostActionPerformed(evt);
+                buttonAtualizarPActionPerformed(evt);
+            }
+        });
+
+        txtIdPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdPostActionPerformed(evt);
             }
         });
 
@@ -148,7 +163,7 @@ public class TabelaFoto extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonAtualizarP)
-                            .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -166,7 +181,7 @@ public class TabelaFoto extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonInserirP2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -197,27 +212,55 @@ public class TabelaFoto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaCurtePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCurtePMouseClicked
+    private void TabelaFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaFotoMouseClicked
+        if (TabelaFoto.getSelectedRow() != -1){
+            txtIdPost.setText(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 1).toString());
+            txtFile.setText(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 2).toString());
+        }
+    }//GEN-LAST:event_TabelaFotoMouseClicked
 
-    }//GEN-LAST:event_tabelaCurtePMouseClicked
-
+    private void readTabelaFoto(){
+        DefaultTableModel modelo = (DefaultTableModel) TabelaFoto.getModel();
+        modelo.setNumRows(0);
+        
+        FotoDAO fotodao = new FotoDAO();
+        for(Foto foto: fotodao.read()){
+            modelo.addRow(new Object[] {
+                foto.getId(),
+		foto.getIdPost(),
+                foto.getImagem()
+            });
+        }
+    }
+            
     private void buttonInserirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirPActionPerformed
+        FotoDAO fotodao = new FotoDAO();
+        foto.setIdPost(Integer.parseInt(txtIdPost.getText()));
+        fotodao.create(foto);
         
     }//GEN-LAST:event_buttonInserirPActionPerformed
 
     private void buttonExcluirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPActionPerformed
-
+        Foto foto = new Foto();
+        FotoDAO fotodao = new FotoDAO();
+        
+        foto.setId(Integer.parseInt(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(),0).toString()));
+        fotodao.delete(foto);
     }//GEN-LAST:event_buttonExcluirPActionPerformed
 
-    private void textIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdPostActionPerformed
+    private void txtIdPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIdPostActionPerformed
+    }//GEN-LAST:event_txtIdPostActionPerformed
 
     private void buttonInserirP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirP1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonInserirP1ActionPerformed
 
     private void buttonInserirP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInserirP2ActionPerformed
+                
+        
+        //foto.setId(Integer.parseInt(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(),0).toString()));
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         
@@ -231,8 +274,29 @@ public class TabelaFoto extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             txtFile.setText(file.getPath());
             lbImagem.setIcon(new ImageIcon(file.getPath()));
+            foto.setImagem(file.getPath());
         }
+        
+        readTabelaFoto();
     }//GEN-LAST:event_buttonInserirP2ActionPerformed
+
+    private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
+        if(TabelaFoto.getSelectedRow() != -1){
+            Foto foto = new Foto();
+            FotoDAO fotodao = new FotoDAO();
+            
+            String imagem = TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 2).toString();
+            String idPost = TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 1).toString();
+                
+            foto.setId((int)TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 0));
+            foto.setIdPost(Integer.parseInt(txtIdPost.getText()));
+            foto.setImagem(txtFile.getText());
+            fotodao.update(foto, imagem, idPost);
+            
+            readTabelaFoto();  
+        
+        }      
+    }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,6 +335,7 @@ public class TabelaFoto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaFoto;
     private javax.swing.JButton buttonAtualizarP;
     private javax.swing.JButton buttonExcluirP;
     private javax.swing.JButton buttonInserirP;
@@ -282,8 +347,7 @@ public class TabelaFoto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbImagem;
-    private javax.swing.JTable tabelaCurteP;
-    private javax.swing.JTextField textIdPost;
     private javax.swing.JTextField txtFile;
+    private javax.swing.JTextField txtIdPost;
     // End of variables declaration//GEN-END:variables
 }
