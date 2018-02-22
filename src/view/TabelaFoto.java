@@ -48,7 +48,7 @@ public class TabelaFoto extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TabelaFoto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

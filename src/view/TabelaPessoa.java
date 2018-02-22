@@ -40,7 +40,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
         tabelaPessoa = new javax.swing.JTable();
         lbImagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nome");
 
@@ -114,9 +114,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
                                 .addComponent(buttonExcluirP)))
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttonAtualizarP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(buttonAtualizarP)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -319,6 +317,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
             lbImagem.setIcon(new ImageIcon(file.getPath()));
             pessoa.setFoto(file.getPath());
         }
+        
         
         readTabelaPessoa();
     }//GEN-LAST:event_buttonAtualizarP1ActionPerformed

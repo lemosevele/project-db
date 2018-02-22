@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/evele/Documents/NetBeansProjects/project-db/src/dao/FotoDAO.java</file>
-            <file>file:/C:/Users/evele/Documents/NetBeansProjects/project-db/src/view/TabelaFoto.java</file>
-            <file>file:/C:/Users/evele/Documents/NetBeansProjects/project-db/src/view/TabelaCurtePost.java</file>
-            <file>file:/C:/Users/evele/Documents/NetBeansProjects/project-db/src/dominio/Foto.java</file>
-            <file>file:/C:/Users/evele/Documents/NetBeansProjects/project-db/src/dao/PessoaDAO.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/dao/PessoaDAO.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/dominio/Pessoa.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/view/TabelaFoto.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/view/TelaInicial.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/view/TabelaAmizade.java</file>
+            <file>file:/C:/Users/Manoel%20Freitas/Documents/project-db/src/view/TabelaPessoa.java</file>
         </group>
     </open-files>
 </project-private>

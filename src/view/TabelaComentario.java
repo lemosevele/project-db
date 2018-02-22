@@ -43,7 +43,7 @@ public class TabelaComentario extends javax.swing.JFrame {
 
         jLabel5.setText("idPessoa");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         buttonInserirP.setText("Inserir");
         buttonInserirP.addActionListener(new java.awt.event.ActionListener() {
