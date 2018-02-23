@@ -17,6 +17,9 @@ public class TabelaFoto extends javax.swing.JFrame {
 
     
     private Foto foto = new Foto();
+    private String imagem_salvo = "";
+    private int idPost_salvo;
+    private int id_salvo;
     public TabelaFoto() {
         initComponents();
         readTabelaFoto();
@@ -81,16 +84,16 @@ public class TabelaFoto extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(lbImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addComponent(lbImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -206,6 +209,7 @@ public class TabelaFoto extends javax.swing.JFrame {
         if (TabelaFoto.getSelectedRow() != -1){
             txtIdPost.setText(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 1).toString());
             txtFile.setText(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 2).toString());
+            id_salvo = Integer.parseInt(TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 0).toString());
         }
     }//GEN-LAST:event_TabelaFotoMouseClicked
 
@@ -275,18 +279,22 @@ public class TabelaFoto extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInserirP2ActionPerformed
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
-        if(TabelaFoto.getSelectedRow() != -1){
-            Foto foto = new Foto();
-            FotoDAO fotodao = new FotoDAO();
-
-            foto.setId((int)TabelaFoto.getValueAt(TabelaFoto.getSelectedRow(), 0));
-            foto.setIdPost(Integer.parseInt(txtIdPost.getText()));
-            foto.setImagem(txtFile.getText());
-            fotodao.update(foto);
-            
-            readTabelaFoto();  
+     
+        Foto foto = new Foto();
+        FotoDAO fotodao = new FotoDAO();
         
-        }      
+        imagem_salvo = txtFile.getText();
+        
+        if(!(txtIdPost.getText().isEmpty())){
+            idPost_salvo = Integer.parseInt(txtIdPost.getText());
+            foto.setId(id_salvo);
+            foto.setIdPost(idPost_salvo);
+            foto.setImagem(imagem_salvo);
+            fotodao.update(foto);  
+        }
+        readTabelaFoto(); 
+        
+              
     }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     public static void main(String args[]) {

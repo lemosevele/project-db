@@ -14,6 +14,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TabelaPessoa extends javax.swing.JFrame {
     
     private Pessoa pessoa = new Pessoa();
+    private String nome_salvo="" ;
+    private int idade_salvo ;
+    private String foto_salvo="";
+    private int id_salvo;
     
     public TabelaPessoa() {
         initComponents();
@@ -100,7 +104,7 @@ public class TabelaPessoa extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buttonInserirP)
@@ -118,17 +122,15 @@ public class TabelaPessoa extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonAtualizarP1)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonAtualizarP1))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel1)
                         .addGap(108, 108, 108)
                         .addComponent(jLabel2)
                         .addGap(135, 135, 135)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(13, 13, 13))
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,8 +193,6 @@ public class TabelaPessoa extends javax.swing.JFrame {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        lbImagem.setText("jLabel4");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,7 +234,10 @@ public class TabelaPessoa extends javax.swing.JFrame {
             });
         }
     }
-
+    
+    public void setNome(String n){
+        this.nome_salvo = n;
+    }
     
     private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
         // TODO add your handling code here:
@@ -278,23 +281,34 @@ public class TabelaPessoa extends javax.swing.JFrame {
             textNome.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 1).toString());
             textIdade.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 2).toString());
             txtFile.setText(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 3).toString());
+            id_salvo = Integer.parseInt(tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 0).toString());
+            
+            
+                                                
         }
     }//GEN-LAST:event_tabelaPessoaMouseClicked
 
     private void buttonAtualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarPActionPerformed
-        if(tabelaPessoa.getSelectedRow() != -1){
-            Pessoa pessoa = new Pessoa();
-            PessoaDAO pessoaDAO = new PessoaDAO();
-                
-            pessoa.setNome(textNome.getText());
-            pessoa.setIdade(Integer.parseInt(textIdade.getText()));
-            pessoa.setFoto(txtFile.getText());
-            pessoa.setId((int)tabelaPessoa.getValueAt(tabelaPessoa.getSelectedRow(), 0));
-            pessoaDAO.update(pessoa);
         
-            readTabelaPessoa();
-            
+        Pessoa pessoa = new Pessoa();
+        PessoaDAO pessoaDAO = new PessoaDAO();
+
+        nome_salvo = textNome.getText(); 
+        foto_salvo = txtFile.getText();
+        
+        if (!(textIdade.getText().isEmpty())){
+            idade_salvo = Integer.parseInt(textIdade.getText());  
+            if (nome_salvo != "" && foto_salvo!=""){
+            pessoa.setNome(nome_salvo);
+            pessoa.setIdade(idade_salvo);
+            pessoa.setFoto(foto_salvo);
+            pessoa.setId(id_salvo);
+            pessoaDAO.update(pessoa);
         }
+        }
+        
+        
+        readTabelaPessoa();
     }//GEN-LAST:event_buttonAtualizarPActionPerformed
 
     private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
